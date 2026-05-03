@@ -1,0 +1,18 @@
+services:
+  web1:
+    image: nginx:latest
+    volumes:
+      - ./web1:/usr/share/nginx/html
+  web2:
+    image: nginx:latest
+    volumes:
+      - ./web2:/usr/share/nginx/html
+  balancer:
+    image: nginx:latest
+    volumes:
+      - ./nginx:/etc/nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - web1
+      - web2
